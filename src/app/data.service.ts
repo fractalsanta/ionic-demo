@@ -6,11 +6,9 @@ import { map } from 'rxjs/operators/map';
 import { GridDataResult } from '../../node_modules/@progress/kendo-angular-grid';
 import { TagPlaceholder } from '../../node_modules/@angular/compiler/src/i18n/i18n_ast';
 
-const URL = 'http://zameerh:5000/dam-levels';
+const URL = 'http://localhost:5000/dam-levels';
 
-@Injectable({
-  providedIn: 'root'
-})
+ @Injectable()
 export class DataService {
   constructor(private http: HttpClient) {}
 
