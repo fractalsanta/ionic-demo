@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-md-7">
+        <kendo-grid [data]="gridView" [pageable]="true" [pageSize]="state.take" [skip]="state.skip" [scrollable]="'none'" [selectable]="selectableSettings"
+            [filterable]="true" [filter]="state.filter" [sortable]="{
+            allowUnsort: true,
+            mode: 'single'
+            }" [sort]="sort" (sortChange)="sortChange($event)" (selectionChange)="selectionChange($event)" (dataStateChange)="dataStateChange($event)">
+            <kendo-grid-column field="capital.name" title="Capital">
+            </kendo-grid-column>
+            <kendo-grid-column field="province" title="Province">
+            </kendo-grid-column>
+            <kendo-grid-column field="waterInStorage" title="Water In Storage">
+            </kendo-grid-column>
+            <kendo-grid-column field="fsc" title="Full Storage Capacity">
+            </kendo-grid-column>
+            <kendo-grid-column field="percentageFull" title="Percentage Full">
+            </kendo-grid-column>
+
+            <div *kendoGridDetailTemplate="let dataItem">
+                <app-grid-detail [levels]="dataItem.levels"></app-grid-detail>
+            </div>
+
+        </kendo-grid>
+    </div>
+
+    <div class="col-md-5">
+        <google-chart [data]="geoChartData" (chartSelect)="onMapSelected($event)"></google-chart>
+    </div>
+</div>
+
+<div class="row" *ngIf="selectedProvince">
+    <div class="col-md-4">
+        <app-chart-bar-levels [province]="selectedProvince"></app-chart-bar-levels>
+    </div>
+    <div class="col-md-4">
+        <app-chart-line-levels [province]="selectedProvince"></app-chart-line-levels>
+    </div>
+    <div class="col-md-4" *ngIf="selectedProvince">
+        <app-chart-stacked-levels [province]="selectedProvince"></app-chart-stacked-levels>
+    </div>
+</div>

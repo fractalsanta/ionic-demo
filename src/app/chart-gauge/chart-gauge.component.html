@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h5 style="text-align: center;">
+      {{gaugeData.province}} water percentage level on {{gaugeData.date}}
+    </h5>
+
+    <kendo-radialgauge #radial [pointer]="{ value: gaugeData.level }">
+      <kendo-radialgauge-scale [minorUnit]="5" [majorUnit]="20" [max]="100" [reverse]="gaugeData.reverse">
+        <kendo-radialgauge-scale-ranges>
+          <kendo-radialgauge-scale-range [from]="0" [to]="10" color="#c20000">
+          </kendo-radialgauge-scale-range>
+          <kendo-radialgauge-scale-range [from]="10" [to]="20" color="#ff7a00">
+          </kendo-radialgauge-scale-range>
+          <kendo-radialgauge-scale-range [from]="20" [to]="30" color="#ffc700">
+          </kendo-radialgauge-scale-range>
+          <kendo-radialgauge-scale-range [from]="30" [to]="80" color="#337ab7">
+          </kendo-radialgauge-scale-range>
+          <kendo-radialgauge-scale-range [from]="80" [to]="100" color="#18B739">
+          </kendo-radialgauge-scale-range>
+        </kendo-radialgauge-scale-ranges>
+        <kendo-radialgauge-scale-labels format="{0}%" [visible]="true">
+        </kendo-radialgauge-scale-labels>
+      </kendo-radialgauge-scale>
+    </kendo-radialgauge>
+
+    <div style="text-align: center;">
+      <h2>{{gaugeData.level}}%</h2>
+      <button class="btn btn-default" (click)="onClearGauge()">Back</button>
+    </div>
+  </div>
+</div>
