@@ -26,7 +26,7 @@
     </ion-row>
 
     <ion-row>
-      <ion-col col-12>
+      <ion-col>
         <ion-slides>
           <ion-slide>
             <h3>Bar chart</h3>
@@ -35,8 +35,7 @@
           <ion-slide>
             <h3>Stacked bar chart of {{ selectedProvince.province }} + {{ randomProvince.province }}</h3>
             <canvas baseChart [datasets]="lineChartData" [labels]="chartLabels" [options]="stackedBarChartOptions
-               " [legend]="true" (chartClick)="chartClicked($event)" chartType="bar" width="550" height="280">
-            </canvas>
+               " [legend]="true" (chartClick)="chartClicked($event)" chartType="bar"></canvas>
           </ion-slide>
           <ion-slide>
             <h3>Line chart of {{ selectedProvince.province }} vs {{ randomProvince.province }}</h3>

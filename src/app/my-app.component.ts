@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
   public selectedLabel = null;
   public randomProvince = null;
   public stackedBarChartOptions: any = {
-    responsive: false,
+    responsive: true,
     scales: {
       yAxes: [
         {
