@@ -1,0 +1,56 @@
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <app-table-component [flatProvinces]="flatProvinces" (userRowSelect)="onRowSelected($event)"></app-table-component>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3>
+      <!-- <app-map-component [provinces]="provinces"></app-map-component> -->
+    </ion-col>
+  </ion-row>
+  <div *ngIf="selectedProvince">
+    <ion-row>
+      <ion-item>
+        <h3>Summary of province</h3>
+        <app-summary-component [province]="selectedProvince"></app-summary-component>
+      </ion-item>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button (click)="goToSlide(0)">Bar Chart</button>
+        <button ion-button (click)="goToSlide(1)">Stacked Chart</button>
+        <button ion-button (click)="goToSlide(2)">Line Chart</button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+        <ion-slides>
+          <ion-slide>
+            <h3>Bar chart</h3>
+            <app-bar-chart-component [data]="barChartData" [labels]="chartLabels" (chartClicked)="chartClicked($event)"></app-bar-chart-component>
+          </ion-slide>
+          <ion-slide>
+            <h3>Stacked bar chart of {{ selectedProvince.province }} + {{ randomProvince.province }}</h3>
+            <canvas baseChart [datasets]="lineChartData" [labels]="chartLabels" [options]="stackedBarChartOptions
+               " [legend]="true" (chartClick)="chartClicked($event)" chartType="bar" width="550" height="280">
+            </canvas>
+          </ion-slide>
+          <ion-slide>
+            <h3>Line chart of {{ selectedProvince.province }} vs {{ randomProvince.province }}</h3>
+            <canvas baseChart [datasets]="lineChartData" [labels]="chartLabels" [options]="lineChartOptions" [legend]="true
+               " (chartClick)="chartClicked($event)" chartType="line"></canvas>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="selectedData">
+      <h3>Gauge</h3>
+      <canvas baseChart [datasets]="selectedData" [labels]="selectedLabel" [options]="doughnutChartOptions
+       " [legend]="true" chartType="doughnut"></canvas>
+    </ion-row>
+  </div>
+</ion-grid>
