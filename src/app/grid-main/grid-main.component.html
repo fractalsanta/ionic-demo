@@ -1,41 +1,66 @@
 <div class="row">
-    <div class="col-md-7">
-        <kendo-grid [data]="gridView" [pageable]="true" [pageSize]="state.take" [skip]="state.skip" [scrollable]="'none'" [selectable]="selectableSettings"
-            [filterable]="true" [filter]="state.filter" [sortable]="{
+    <div class="col-md-12">
+        <kendo-grid [height]="380" [data]="gridView" [pageable]="true" [pageSize]="state.take" [skip]="state.skip" [scrollable]="'none'"
+            [selectable]="selectableSettings" [filterable]="true" [filter]="state.filter" [sortable]="{
             allowUnsort: true,
             mode: 'single'
             }" [sort]="sort" (sortChange)="sortChange($event)" (selectionChange)="selectionChange($event)" (dataStateChange)="dataStateChange($event)">
-            <kendo-grid-column field="capital.name" title="Capital">
+            <!-- Small devices -->
+            <kendo-grid-column media="xs" field="capital.name" title="Capital">
             </kendo-grid-column>
-            <kendo-grid-column field="province" title="Province">
-            </kendo-grid-column>
-            <kendo-grid-column field="waterInStorage" title="Water In Storage">
-            </kendo-grid-column>
-            <kendo-grid-column field="fsc" title="Full Storage Capacity">
-            </kendo-grid-column>
-            <kendo-grid-column field="percentageFull" title="Percentage Full">
+            <kendo-grid-column media="xs" field="province" title="Province">
             </kendo-grid-column>
 
-            <div *kendoGridDetailTemplate="let dataItem">
-                <app-grid-detail [levels]="dataItem.levels"></app-grid-detail>
-            </div>
+            <!-- Medium devices -->
+            <kendo-grid-column media="md" field="capital.name" title="Capital - Medium">
+            </kendo-grid-column>
+            <kendo-grid-column media="md" field="province" title="Province - Medium">
+            </kendo-grid-column>
+            <kendo-grid-column media="md" field="waterInStorage" title="Water In Storage - Medium">
+            </kendo-grid-column>
+
+            <!-- Larger devices and desktop -->
+            <kendo-grid-column media="lg" field="capital.name" title="Capital - Medium">
+            </kendo-grid-column>
+            <kendo-grid-column media="lg" field="province" title="Province - Medium">
+            </kendo-grid-column>
+            <kendo-grid-column media="lg" field="waterInStorage" title="Water In Storage - Medium">
+            </kendo-grid-column>
+            <kendo-grid-column media="lg" field="fsc" title="Full Storage Capacity - Medium">
+            </kendo-grid-column>
+            <kendo-grid-column media="lg" field="percentageFull" title="Percentage Full - Medium">
+            </kendo-grid-column>
 
         </kendo-grid>
     </div>
-
+</div>
+<ion-title>
+    Geo Data
+</ion-title>
+<div class="row">
     <div class="col-md-5">
-        <google-chart [data]="geoChartData" (chartSelect)="onMapSelected($event)"></google-chart>
+        <google-chart [data]="geoChartData" (chartSelect)="onMapSelected($event)" width="200"></google-chart>
     </div>
 </div>
-
 <div class="row" *ngIf="selectedProvince">
-    <div class="col-md-4">
-        <app-chart-bar-levels [province]="selectedProvince"></app-chart-bar-levels>
+    <div class="col-md-5">
+        <a (click)="goToSlide(0)">Bar Chart</a> |
+        <a (click)="goToSlide(1)">Line Chart</a> |
+        <a (click)="goToSlide(2)">Stacked Chart</a>
     </div>
-    <div class="col-md-4">
-        <app-chart-line-levels [province]="selectedProvince"></app-chart-line-levels>
-    </div>
-    <div class="col-md-4" *ngIf="selectedProvince">
-        <app-chart-stacked-levels [province]="selectedProvince"></app-chart-stacked-levels>
+</div>
+<div class="row" *ngIf="selectedProvince">
+    <div class="col-md-5">
+        <ion-slides>
+            <ion-slide>
+                <app-chart-bar-levels [province]="selectedProvince"></app-chart-bar-levels>
+            </ion-slide>
+            <ion-slide>
+                <app-chart-line-levels [province]="selectedProvince"></app-chart-line-levels>
+            </ion-slide>
+            <ion-slide>
+                <app-chart-stacked-levels [province]="selectedProvince"></app-chart-stacked-levels>
+            </ion-slide>
+        </ion-slides>
     </div>
 </div>

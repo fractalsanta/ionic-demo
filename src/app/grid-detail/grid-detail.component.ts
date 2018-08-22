@@ -20,7 +20,8 @@ import * as _ from 'lodash';
 `
 })
 export class GridDetailComponent implements OnInit {
-  @Input() public levels: DamMeasure[];
+  @Input()
+  public levels: DamMeasure[];
 
   constructor() {}
 

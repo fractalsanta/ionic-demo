@@ -3,17 +3,28 @@ import { DataService } from '../data.service';
 import { ProvincialDamLevel } from '../data.model';
 import { GridDataResult, DataStateChangeEvent, SelectableSettings } from '../../../node_modules/@progress/kendo-angular-grid';
 import { SortDescriptor, orderBy, State, process } from '../../../node_modules/@progress/kendo-data-query';
+import { Slides } from 'ionic-angular';
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-grid-main',
-  templateUrl: 'grid-main.component.html'
+  templateUrl: 'grid-main.component.html',
+  styles: ['a { cursor: pointer; }']
 })
 export class GridMainComponent implements OnInit {
+  @ViewChild(Slides)
+  slides: Slides;
   public seriesDate;
   public selectedProvince: any;
   public geoChartData;
 
+  public selectedChart: 'default';
+
   public gridView: GridDataResult;
+
+  public goToSlide(index: number) {
+    this.slides.slideTo(index, 500);
+  }
 
   public selectableSettings: SelectableSettings = {
     checkboxOnly: false,
@@ -96,5 +107,9 @@ export class GridMainComponent implements OnInit {
     if (event.selectedRowValues !== null) {
       this.onSelected(this.findProvinceByCapital(event.selectedRowValues[0]));
     }
+  }
+
+  setChart(chartName) {
+    this.selectedChart = chartName;
   }
 }

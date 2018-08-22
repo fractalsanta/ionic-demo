@@ -1,18 +1,18 @@
+import { HomePage } from './../pages/home/home';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-
+import 'hammerjs';
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 
 //Chart imports
 import { HttpClientModule } from '@angular/common/http';
 
 //import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
+//import { HeaderComponent } from './header/header.component';
 import { DataService } from './data.service';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { ChartModule } from '@progress/kendo-angular-charts';
@@ -28,13 +28,13 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
     GridDetailComponent,
     GridMainComponent,
     ChartBarLevelsComponent,
     ChartLineLevelsComponent,
     ChartStackedLevelsComponent,
-    ChartGaugeComponent
+    ChartGaugeComponent,
+    HomePage
   ],
   imports: [
     BrowserModule,
@@ -54,6 +54,7 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
   ],
   bootstrap: [IonicApp],
   entryComponents: [MyApp, HomePage, GridMainComponent],
+  //entryComponents: [GridMainComponent],
   providers: [StatusBar, SplashScreen, DataService, { provide: ErrorHandler, useClass: IonicErrorHandler }]
 })
 export class AppModule {}
